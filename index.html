@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cattleya — Hair &amp; Nails Salon · 29 John Street, Luton</title>
+<meta name="description" content="Cattleya — a small hair and nails salon on John Street in Luton. By appointment. Message us on Facebook to book.">
+<meta name="theme-color" content="#5C1A36">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF4EB;
+  --paper-warm:#F2E9D9;
+  --blush:#F4D6DA;
+  --blush-deep:#E9B6BE;
+  --orchid:#A33159;
+  --plum:#5C1A36;
+  --plum-deep:#3A0F22;
+  --throat:#D9A627;
+  --ink:#1A0E14;
+  --line:rgba(26,14,20,.18);
+  --rhythm:clamp(1rem, .62rem + .9vw, 1.15rem);
+  --display:"Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --body:"Jost", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gutter:clamp(1.25rem, 4vw, 3rem);
+  --maxw:84rem;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:var(--body);
+  font-weight:400;
+  font-size:var(--rhythm);
+  line-height:1.55;
+  color:var(--ink);
+  background:var(--paper);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+body::before{
+  /* paper grain — kills the flat-AI sheen */
+  content:"";
+  position:fixed;inset:0;pointer-events:none;z-index:60;
+  opacity:.08;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .1 0 0 0 0 .06 0 0 0 0 .08 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{font-family:var(--display);font-weight:500;letter-spacing:-.012em;text-wrap:balance;margin:0}
+p{text-wrap:pretty;hyphens:auto;margin:0}
+hr{border:0;border-top:1px solid var(--line);margin:0}
+
+.shell{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter)}
+.eyebrow{font-family:var(--body);font-weight:500;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase}
+
+/* ───── progress hairline ───── */
+.progress{
+  position:fixed;inset:0 0 auto 0;height:2px;
+  background:var(--plum);transform-origin:0 50%;transform:scaleX(0);
+  z-index:80;
+}
+@supports (animation-timeline:scroll()) {
+  .progress{
+    animation:bar linear both;
+    animation-timeline:scroll(root);
+  }
+  @keyframes bar{to{transform:scaleX(1)}}
+}
+
+/* ───── top bar ───── */
+.top{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in oklab, var(--paper) 86%, transparent);
+  backdrop-filter:saturate(140%) blur(8px);
+  -webkit-backdrop-filter:saturate(140%) blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.top__row{
+  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  padding:.95rem 0;
+}
+.brand{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:1.45rem;line-height:1;letter-spacing:-.01em;
+  display:inline-flex;align-items:baseline;gap:.45rem;
+}
+.brand__dot{
+  width:.42rem;height:.42rem;border-radius:50%;
+  background:var(--orchid);transform:translateY(-.15rem);
+}
+.nav{display:flex;gap:1.6rem;font-size:.86rem;font-weight:500}
+.nav a{
+  position:relative;padding-bottom:.12rem;
+}
+.nav a::after{
+  content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px;
+  background:var(--ink);transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .35s cubic-bezier(.2,.7,.2,1);
+}
+.nav a:hover::after,.nav a:focus-visible::after{transform:scaleX(1)}
+.top__cta{
+  font-family:var(--body);font-weight:500;font-size:.82rem;
+  letter-spacing:.04em;
+  border:1px solid var(--ink);border-radius:999px;
+  padding:.5rem 1rem;
+  transition:background .25s ease, color .25s ease;
+  white-space:nowrap;
+}
+.top__cta:hover{background:var(--ink);color:var(--paper)}
+@media (max-width:760px){
+  .nav{display:none}
+}
+
+/* ───── hero ───── */
+.hero{
+  position:relative;
+  padding:clamp(3.25rem,9vw,7rem) 0 clamp(2.25rem,6vw,4.5rem);
+  overflow:hidden;
+}
+.hero__grid{
+  display:grid;gap:clamp(1.25rem, 3vw, 2.5rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:860px){
+  .hero__grid{grid-template-columns:1.35fr .9fr;align-items:end}
+}
+.hero__lockup{position:relative}
+.hero__kicker{
+  display:flex;align-items:center;gap:.8rem;
+  margin-bottom:1.5rem;color:var(--plum);
+}
+.hero__kicker .rule{
+  flex:0 0 2.2rem;height:1px;background:var(--plum);opacity:.55;
+}
+.hero__title{
+  font-style:italic;font-weight:500;
+  font-size:clamp(4.2rem, 14.5vw, 13rem);
+  line-height:.86;letter-spacing:-.035em;
+  color:var(--plum);
+  margin:0;
+}
+.hero__title .amp{
+  font-style:italic;font-weight:300;
+  color:var(--orchid);
+  padding:0 .05em;
+}
+.hero__sub{
+  font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:clamp(1.6rem, 3.4vw, 2.4rem);
+  line-height:1.15;margin-top:1.2rem;color:var(--ink);
+  max-width:32ch;
+}
+.hero__sub em{
+  font-style:italic;color:var(--orchid);
+  background-image:linear-gradient(transparent 78%, color-mix(in oklab, var(--throat) 70%, transparent) 78%, color-mix(in oklab, var(--throat) 70%, transparent) 94%, transparent 94%);
+  padding:0 .1em;
+}
+.hero__meta{
+  display:flex;flex-direction:column;gap:1.25rem;
+  font-size:.95rem;line-height:1.55;
+  border-left:1px solid var(--line);
+  padding-left:clamp(1rem, 2vw, 1.75rem);
+}
+@media (max-width:859px){
+  .hero__meta{border-left:0;border-top:1px solid var(--line);padding-left:0;padding-top:1.25rem}
+}
+.hero__meta dt{
+  font-family:var(--body);font-weight:500;
+  font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--plum);margin-bottom:.25rem;
+}
+.hero__meta dd{margin:0;font-family:var(--display);font-size:1.15rem;line-height:1.35}
+.hero__meta a{border-bottom:1px solid var(--line)}
+.hero__meta a:hover{border-color:var(--plum);color:var(--plum)}
+
+/* ─── orchid mark (inline SVG, hand-drawn-ish) ─── */
+.orchid{
+  position:absolute;
+  top:-2.5rem;right:-3rem;
+  width:clamp(18rem, 32vw, 30rem);
+  opacity:.16;pointer-events:none;
+  color:var(--orchid);
+  transform:rotate(8deg);
+}
+@media (max-width:859px){.orchid{top:-1rem;right:-6rem;width:24rem;opacity:.12}}
+
+/* ───── marquee ───── */
+.marquee{
+  border-block:1px solid var(--line);
+  background:var(--paper-warm);
+  overflow:hidden;
+  --speed:42s;
+}
+.marquee__track{
+  display:inline-flex;align-items:center;gap:2.6rem;
+  white-space:nowrap;padding-block:1rem;
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(1.5rem, 3vw, 2.4rem);
+  line-height:1;color:var(--plum);
+  animation:scroll var(--speed) linear infinite;
+  will-change:transform;
+}
+.marquee__track span{display:inline-block}
+.marquee__track .dot{
+  width:.4rem;height:.4rem;border-radius:50%;
+  background:var(--orchid);
+  display:inline-block;transform:translateY(-.4rem);
+  margin:0 .25rem;
+}
+@keyframes scroll{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee__track{animation:none}}
+
+/* ───── section base ───── */
+section{padding:clamp(3rem,7vw,5.5rem) 0}
+.section__head{
+  display:grid;gap:.9rem;margin-bottom:clamp(1.75rem,3.5vw,3rem);
+}
+.section__head .eyebrow{color:var(--orchid)}
+.section__title{
+  font-style:italic;font-weight:500;
+  font-size:clamp(2.2rem, 5.5vw, 4.2rem);
+  line-height:1;letter-spacing:-.02em;
+  color:var(--plum);
+}
+
+.slab--blush{background:var(--blush);color:var(--plum-deep)}
+.slab--plum{background:var(--plum);color:var(--paper)}
+.slab--plum .section__head .eyebrow{color:var(--blush)}
+.slab--plum .section__title{color:var(--paper)}
+.slab--plum a{color:var(--paper)}
+.slab--plum a:hover{color:var(--blush)}
+
+/* ───── about ───── */
+.about__grid{
+  display:grid;gap:clamp(1.5rem,4vw,3rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:860px){
+  .about__grid{grid-template-columns:1.2fr 1fr;align-items:start}
+}
+.about__lede{
+  font-family:var(--display);font-weight:300;
+  font-size:clamp(1.4rem, 2.5vw, 1.85rem);
+  line-height:1.32;letter-spacing:-.005em;
+  color:var(--plum-deep);
+  max-width:38ch;
+}
+.about__lede em{font-style:italic;color:var(--orchid)}
+.about__copy p+p{margin-top:1rem}
+.pull{
+  font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:1.1rem;line-height:1.45;color:var(--plum);
+  border-left:2px solid var(--orchid);
+  padding:.1rem 0 .1rem 1rem;margin-top:1.5rem;
+  max-width:36ch;
+}
+
+/* ───── services ───── */
+.svc{
+  display:grid;gap:clamp(1.25rem,2.6vw,2rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:760px){.svc{grid-template-columns:1fr 1fr}}
+.svc__card{
+  position:relative;
+  background:var(--paper);
+  color:var(--ink);
+  padding:clamp(1.6rem,3vw,2.4rem);
+  border:1px solid color-mix(in oklab, var(--plum) 14%, transparent);
+  border-radius:0;
+  display:grid;gap:1.1rem;
+  overflow:hidden;
+}
+.svc__card::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+  background:linear-gradient(90deg,var(--orchid),var(--throat));
+  transform:scaleX(0);transform-origin:0 50%;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1);
+}
+.svc__card:hover::after{transform:scaleX(1)}
+.svc__num{
+  font-family:var(--display);font-style:italic;font-weight:300;
+  font-size:1.1rem;color:var(--orchid);
+}
+.svc__title{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(1.8rem, 3vw, 2.5rem);line-height:1;
+  letter-spacing:-.015em;color:var(--plum);
+}
+.svc__title em{font-style:italic;font-weight:300}
+.svc__body{font-size:.98rem;line-height:1.55;color:color-mix(in oklab, var(--ink) 86%, transparent)}
+.svc__list{
+  list-style:none;padding:0;margin:.4rem 0 0;
+  display:flex;flex-wrap:wrap;gap:.45rem .75rem;
+}
+.svc__list li{
+  font-family:var(--body);font-weight:500;
+  font-size:.78rem;letter-spacing:.05em;text-transform:uppercase;
+  padding:.32rem .7rem;border:1px solid color-mix(in oklab, var(--plum) 22%, transparent);
+  border-radius:999px;color:var(--plum);
+}
+.svc__note{
+  margin-top:1.25rem;font-family:var(--display);font-style:italic;
+  font-size:1rem;color:var(--plum);
+  border-top:1px solid var(--line);padding-top:1rem;
+}
+
+/* ───── find / contact ───── */
+.find{
+  display:grid;gap:clamp(1.5rem,4vw,3rem);
+  grid-template-columns:1fr;align-items:start;
+}
+@media (min-width:860px){.find{grid-template-columns:1fr 1fr}}
+.card-letterhead{
+  background:var(--paper);color:var(--ink);
+  padding:clamp(1.75rem,3vw,2.4rem);
+  border:1px solid var(--line);
+}
+.card-letterhead h3{
+  font-style:italic;font-weight:500;font-size:1.6rem;color:var(--plum);
+  margin-bottom:1rem;
+}
+.address{
+  font-family:var(--display);font-size:1.35rem;line-height:1.3;
+  color:var(--plum-deep);
+}
+.address span{display:block}
+.actions{
+  display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.5rem;
+}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:var(--body);font-weight:500;font-size:.88rem;
+  letter-spacing:.04em;
+  padding:.7rem 1.15rem;border-radius:999px;
+  transition:transform .2s ease, background .25s ease, color .25s ease;
+}
+.btn--solid{background:var(--plum);color:var(--paper)}
+.btn--solid:hover{background:var(--orchid);transform:translateY(-1px)}
+.btn--ghost{background:transparent;color:var(--plum);border:1px solid var(--plum)}
+.btn--ghost:hover{background:var(--plum);color:var(--paper)}
+.btn svg{width:1.05em;height:1.05em}
+.unverified{
+  font-family:var(--body);font-size:.78rem;letter-spacing:.02em;
+  color:color-mix(in oklab, var(--plum) 70%, transparent);
+  margin-top:1.25rem;
+  border-top:1px dashed var(--line);padding-top:.9rem;
+}
+
+/* ───── footer ───── */
+footer{
+  background:var(--plum-deep);color:var(--paper);
+  padding:clamp(2.5rem,5vw,4rem) 0 1.75rem;
+}
+.foot{
+  display:grid;gap:clamp(1.5rem,3vw,2.5rem);
+  grid-template-columns:1fr;
+}
+@media (min-width:760px){.foot{grid-template-columns:1.3fr 1fr 1fr}}
+.foot__mark{
+  font-family:var(--display);font-style:italic;font-weight:500;
+  font-size:clamp(2.8rem,8vw,5rem);line-height:.95;
+  color:var(--paper);
+}
+.foot__mark em{color:var(--blush);font-weight:300}
+.foot__cap{
+  font-family:var(--body);font-size:.78rem;letter-spacing:.22em;
+  text-transform:uppercase;color:color-mix(in oklab, var(--paper) 70%, transparent);
+  margin-top:1rem;
+}
+.foot h4{
+  font-family:var(--body);font-weight:500;
+  font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--blush);margin-bottom:.9rem;
+}
+.foot ul{list-style:none;padding:0;margin:0;display:grid;gap:.55rem;font-size:.95rem}
+.foot ul a{border-bottom:1px solid transparent;transition:border-color .25s ease}
+.foot ul a:hover{border-color:var(--blush)}
+.foot__base{
+  margin-top:clamp(2rem,4vw,3rem);
+  padding-top:1.25rem;border-top:1px solid color-mix(in oklab, var(--paper) 18%, transparent);
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+  font-size:.78rem;letter-spacing:.04em;
+  color:color-mix(in oklab, var(--paper) 65%, transparent);
+}
+
+/* ───── reveal ───── */
+@supports (animation-timeline:view()) {
+  .reveal{
+    animation:rise both;
+    animation-timeline:view();
+    animation-range:entry 0% cover 22%;
+  }
+  @keyframes rise{
+    from{opacity:0;transform:translateY(2.4rem)}
+    to{opacity:1;transform:none}
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal{animation:none}
+}
+
+::selection{background:var(--orchid);color:var(--paper)}
+</style>
+</head>
+<body>
+
+<div class="progress" aria-hidden="true"></div>
+
+<header class="top">
+  <div class="shell top__row">
+    <a class="brand" href="#top" aria-label="Cattleya — home">
+      <span class="brand__dot" aria-hidden="true"></span>
+      <span><em>Cattleya</em></span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#about">The salon</a>
+      <a href="#services">Hair &amp; nails</a>
+      <a href="#find">Find us</a>
+    </nav>
+    <a class="top__cta" href="https://www.facebook.com/CattleyaSalonLuton/" target="_blank" rel="noopener">Message to book</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ───── HERO ───── -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="shell">
+      <div class="hero__grid">
+
+        <div class="hero__lockup">
+          <!-- Orchid mark — single inline SVG, transformed and tinted -->
+          <svg class="orchid" viewBox="0 0 300 300" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M150 60 C 95 70, 70 130, 115 175 C 75 175, 55 220, 100 245 C 130 235, 150 215, 150 195"/>
+            <path d="M150 60 C 205 70, 230 130, 185 175 C 225 175, 245 220, 200 245 C 170 235, 150 215, 150 195"/>
+            <path d="M150 60 C 132 100, 132 150, 150 195 C 168 150, 168 100, 150 60"/>
+            <path d="M115 175 C 130 200, 170 200, 185 175"/>
+            <path d="M150 195 C 140 210, 142 230, 150 245 C 158 230, 160 210, 150 195 Z" fill="currentColor" fill-opacity=".35"/>
+            <circle cx="150" cy="220" r="4" fill="currentColor"/>
+          </svg>
+
+          <p class="eyebrow hero__kicker">
+            <span class="rule" aria-hidden="true"></span>
+            <span>Hair &amp; Nails · Luton</span>
+          </p>
+
+          <h1 id="hero-title" class="hero__title">
+            Cattleya<span class="amp">&nbsp;·</span>
+          </h1>
+
+          <p class="hero__sub">
+            A small <em>hair &amp; nails</em> salon on John Street, named after the orchid — quietly looked after, by appointment.
+          </p>
+        </div>
+
+        <dl class="hero__meta reveal">
+          <div>
+            <dt>Where</dt>
+            <dd>29 John Street<br>Luton</dd>
+          </div>
+          <div>
+            <dt>To book</dt>
+            <dd><a href="https://www.facebook.com/CattleyaSalonLuton/" target="_blank" rel="noopener">Message us on Facebook&nbsp;↗</a></dd>
+          </div>
+          <div>
+            <dt>Looked after by</dt>
+            <dd><em style="font-family:var(--display);font-style:italic">Loyal regulars · 35 reviews · all five stars</em></dd>
+          </div>
+        </dl>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── MARQUEE ───── -->
+  <div class="marquee" role="presentation" aria-hidden="true">
+    <div class="marquee__track">
+      <!-- doubled for seamless loop -->
+      <span>Hair</span><span class="dot"></span>
+      <span><em style="font-style:italic">Nails</em></span><span class="dot"></span>
+      <span>By appointment</span><span class="dot"></span>
+      <span>29 John Street, Luton</span><span class="dot"></span>
+      <span><em style="font-style:italic">Cattleya</em></span><span class="dot"></span>
+
+      <span>Hair</span><span class="dot"></span>
+      <span><em style="font-style:italic">Nails</em></span><span class="dot"></span>
+      <span>By appointment</span><span class="dot"></span>
+      <span>29 John Street, Luton</span><span class="dot"></span>
+      <span><em style="font-style:italic">Cattleya</em></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <!-- ───── ABOUT ───── -->
+  <section id="about">
+    <div class="shell">
+      <div class="section__head reveal">
+        <span class="eyebrow">The salon</span>
+        <h2 class="section__title">Named after an orchid;<br>run like one.</h2>
+      </div>
+
+      <div class="about__grid">
+        <div class="reveal">
+          <p class="about__lede">
+            A <em>Cattleya</em> is a tropical orchid — slow to bloom, fussy about who looks after it, generous in return. The salon takes the same view of a haircut.
+          </p>
+          <blockquote class="pull">
+            35 reviews on Facebook. All five-star.
+            <br><span style="font-family:var(--body);font-style:normal;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orchid);display:block;margin-top:.5rem;">— quiet, loyal, local</span>
+          </blockquote>
+        </div>
+
+        <div class="about__copy reveal">
+          <p>
+            Cattleya is a small independent hair &amp; nails salon on John Street in Luton. Bookings are taken through Facebook Messenger — message the page with what you’re after and we’ll come back with a time.
+          </p>
+          <p>
+            Hours and prices vary by what you need, so we confirm both on the same message before you come in. Easier than guessing from a price list that wouldn’t fit you anyway.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ───── SERVICES ───── -->
+  <section id="services" class="slab--blush">
+    <div class="shell">
+      <div class="section__head reveal">
+        <span class="eyebrow" style="color:var(--plum)">What we do</span>
+        <h2 class="section__title">Hair, <em>nails</em>, and the time to do them properly.</h2>
+      </div>
+
+      <div class="svc">
+        <article class="svc__card reveal">
+          <span class="svc__num">01 / Hair</span>
+          <h3 class="svc__title">For the <em>hair</em>.</h3>
+          <p class="svc__body">
+            Cuts, colour, treatment work — for every length and texture. We talk it through before we lift the scissors. If you’re unsure, bring two reference pictures and we’ll find the version of it that actually suits you.
+          </p>
+          <ul class="svc__list">
+            <li>Cut &amp; finish</li>
+            <li>Colour</li>
+            <li>Highlights</li>
+            <li>Blow-dry</li>
+            <li>Treatments</li>
+            <li>Bridal &amp; events</li>
+          </ul>
+        </article>
+
+        <article class="svc__card reveal">
+          <span class="svc__num">02 / Nails</span>
+          <h3 class="svc__title">For the <em>nails</em>.</h3>
+          <p class="svc__body">
+            Manicures, pedicures, gel and acrylic — neat work in a calm chair. A short list of finishes, chosen to actually last the week, on natural nails that don’t end up wrecked.
+          </p>
+          <ul class="svc__list">
+            <li>Manicure</li>
+            <li>Pedicure</li>
+            <li>Gel</li>
+            <li>Acrylic</li>
+            <li>Nail art</li>
+            <li>Soak-off</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="svc__note reveal">
+        Prices vary by length, condition, and what you’re after — message us on Facebook with a quick description and we’ll come back with a quote and the next free slot.
+      </p>
+    </div>
+  </section>
+
+  <!-- ───── FIND / CONTACT ───── -->
+  <section id="find" class="slab--plum">
+    <div class="shell">
+      <div class="section__head reveal">
+        <span class="eyebrow">Find us · Book us</span>
+        <h2 class="section__title">29 John Street, <em>Luton</em>.</h2>
+      </div>
+
+      <div class="find">
+
+        <div class="card-letterhead reveal">
+          <h3>The salon</h3>
+          <p class="address">
+            <span><em style="font-family:var(--display);font-style:italic">Cattleya</em></span>
+            <span>29 John Street</span>
+            <span>Luton</span>
+          </p>
+          <div class="actions">
+            <a class="btn btn--solid"
+               href="https://www.google.com/maps/search/?api=1&query=Cattleya+Hair+%26+Nails+Salon+29+John+Street+Luton"
+               target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-7.5-7-12a7 7 0 0 1 14 0c0 4.5-7 12-7 12Z"/><circle cx="12" cy="9" r="2.5"/></svg>
+              Open in Google Maps
+            </a>
+            <a class="btn btn--ghost"
+               href="http://maps.apple.com/?q=Cattleya+Hair+%26+Nails+Salon&address=29+John+Street,+Luton"
+               target="_blank" rel="noopener" style="border-color:var(--paper);color:var(--paper)">
+              Apple Maps
+            </a>
+          </div>
+        </div>
+
+        <div class="card-letterhead reveal">
+          <h3>To book</h3>
+          <p style="font-family:var(--display);font-style:italic;font-size:1.25rem;line-height:1.35;color:var(--plum-deep);max-width:30ch;">
+            Bookings and prices are confirmed by message — it’s how we keep the chair calm rather than the phone ringing.
+          </p>
+          <div class="actions">
+            <a class="btn btn--solid" href="https://www.facebook.com/CattleyaSalonLuton/" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.5 1.6-1.5h1.7V4.4a23 23 0 0 0-2.5-.1c-2.5 0-4.1 1.5-4.1 4.2v2.3H7.4V14h2.7v8h3.4Z"/></svg>
+              Message Cattleya on Facebook
+            </a>
+            <a class="btn btn--ghost" href="https://www.facebook.com/CattleyaSalonLuton/" target="_blank" rel="noopener" style="border-color:var(--paper);color:var(--paper)">
+              See the page
+            </a>
+          </div>
+          <p class="unverified" style="color:color-mix(in oklab, var(--paper) 75%, transparent);border-color:color-mix(in oklab, var(--paper) 25%, transparent)">
+            Phone and opening hours are confirmed in salon and on Facebook — message first to be sure of the chair.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ───── FOOTER ───── -->
+<footer>
+  <div class="shell">
+    <div class="foot">
+      <div>
+        <div class="foot__mark"><em>Cattleya</em></div>
+        <div class="foot__cap">Hair &amp; Nails · 29 John Street, Luton</div>
+      </div>
+      <div>
+        <h4>The salon</h4>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Hair &amp; nails</a></li>
+          <li><a href="#find">Find us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in touch</h4>
+        <ul>
+          <li><a href="https://www.facebook.com/CattleyaSalonLuton/" target="_blank" rel="noopener">Facebook ↗</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Cattleya+Hair+%26+Nails+Salon+29+John+Street+Luton" target="_blank" rel="noopener">Map ↗</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot__base">
+      <span>© Cattleya · independent salon · Luton</span>
+      <span>Named for <em style="font-family:var(--display);font-style:italic">Cattleya</em>, the orchid.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
